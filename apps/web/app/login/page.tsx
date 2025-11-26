@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { signIn } from "next-auth/react";
-import { Button } from "@repo/ui/components/button";
-import { Input } from "@repo/ui/components/input";
+import { Button } from "@workspace/ui/components/button";
+import { Input } from "@workspace/ui/components/input";
 import {
   Card,
   CardHeader,
@@ -11,9 +11,9 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
-} from "@repo/ui/components/card";
-import { Separator } from "@repo/ui/components/separator";
-import { FcGoogle } from "react-icons/fc";
+} from "@workspace/ui/components/card";
+import { Separator } from "@workspace/ui/components/separator";
+import { FcGoogle } from "@workspace/ui/components/icons";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
