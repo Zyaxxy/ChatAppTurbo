@@ -105,9 +105,15 @@ const Hero: React.FC = () => {
         const windowHalfX = window.innerWidth / 2;
         const windowHalfY = window.innerHeight / 2;
 
+        const mouse = new THREE.Vector2();
+        const raycaster = new THREE.Raycaster();
+
         const onMouseMove = (e: MouseEvent) => {
             mouseX = (e.clientX - windowHalfX) * 0.001;
             mouseY = (e.clientY - windowHalfY) * 0.001;
+
+            mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
         };
         document.addEventListener('mousemove', onMouseMove);
 
@@ -147,6 +153,17 @@ const Hero: React.FC = () => {
 
             torusKnot.rotation.y += 0.05 * (targetRotation.y - torusKnot.rotation.y);
             torusKnot.rotation.x += 0.05 * (targetRotation.x - torusKnot.rotation.x);
+
+            // Raycasting for Hover Glow
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObject(torusKnot);
+
+            const isHovered = intersects.length > 0;
+            const targetEmissive = new THREE.Color(isHovered ? 0xc0c0c0 : 0x111111);
+            const targetIntensity = isHovered ? 0.1 : 1.0;
+
+            material.emissive.lerp(targetEmissive, 0.1);
+            material.emissiveIntensity = THREE.MathUtils.lerp(material.emissiveIntensity, targetIntensity, 0.1);
 
             updateSparks();
             renderer.render(scene, camera);
