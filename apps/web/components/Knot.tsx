@@ -26,7 +26,7 @@ const Hero: React.FC = () => {
         // Torus Knot
         const geometry = new THREE.TorusKnotGeometry(9, 2.5, 120, 16);
         const material = new THREE.MeshPhysicalMaterial({
-            color: 0x888888,
+            color: 0x999999,
             emissive: 0x111111,
             metalness: 0.9,
             roughness: 0.1,
@@ -113,6 +113,32 @@ const Hero: React.FC = () => {
 
         const animate = () => {
             requestAnimationFrame(animate);
+
+            // Scroll Animation Start
+            const scrollY = window.scrollY;
+            const maxScroll = window.innerHeight;
+            const progress = Math.min(scrollY / maxScroll, 1);
+
+            // Calculate visible bounds at z=0
+            const dist = camera.position.z;
+            const vFOV = THREE.MathUtils.degToRad(camera.fov);
+            const height = 2 * Math.tan(vFOV / 2) * dist;
+            const width = height * camera.aspect;
+
+            // Target Position (Top Left) and Scale
+            const targetScale = 0.5;
+            const padding = 3;
+            const targetX = -width / 2 + 20;
+            const targetY = height / 2 - 20;
+
+            const currentX = THREE.MathUtils.lerp(0, targetX, progress);
+            const currentY = THREE.MathUtils.lerp(0, targetY, progress);
+            const currentScale = THREE.MathUtils.lerp(1, targetScale, progress);
+
+            torusKnot.position.set(currentX, currentY, 0);
+            torusKnot.scale.set(currentScale, currentScale, currentScale);
+            // Scroll Animation End
+
             torusKnot.rotation.y += 0.003;
             torusKnot.rotation.x += 0.001;
 
@@ -145,7 +171,7 @@ const Hero: React.FC = () => {
 
     return (
         <div className="flex-grow flex flex-col justify-center items-center relative w-full px-6 z-10 pointer-events-none">
-            <div ref={canvasRef} className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none transition-opacity duration-1500"></div>
+            <div ref={canvasRef} className="fixed top-0 left-0 w-full h-full z-0 pointer-events-none transition-opacity duration-1500"></div>
             <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center text-white pointer-events-none">
             </div>
         </div>
