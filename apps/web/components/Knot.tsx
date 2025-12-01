@@ -24,7 +24,7 @@ const Hero: React.FC = () => {
         container.appendChild(renderer.domElement);
 
         // Torus Knot
-        const geometry = new THREE.TorusKnotGeometry(9, 2.5, 120, 16);
+        const geometry = new THREE.TorusKnotGeometry(8, 2, 90, 16);
         const material = new THREE.MeshPhysicalMaterial({
             color: 0x999999,
             emissive: 0x111111,
@@ -131,19 +131,19 @@ const Hero: React.FC = () => {
             const height = 2 * Math.tan(vFOV / 2) * dist;
             const width = height * camera.aspect;
 
-            // Target Position (Top Left) and Scale
-            const targetScale = 0.5;
-            const padding = 3;
-            const targetX = -width / 2 + 20;
-            const targetY = height / 2 - 20;
+            // // Target Position (Top Left) and Scale
+            // const targetScale = 0.5;
+            // const padding = 3;
+            // const targetX = -width / 2 + 20;
+            // const targetY = height / 2 - 20;
 
-            const currentX = THREE.MathUtils.lerp(0, targetX, progress);
-            const currentY = THREE.MathUtils.lerp(0, targetY, progress);
-            const currentScale = THREE.MathUtils.lerp(1, targetScale, progress);
+            // const currentX = THREE.MathUtils.lerp(0, targetX, progress);
+            // const currentY = THREE.MathUtils.lerp(0, targetY, progress);
+            // const currentScale = THREE.MathUtils.lerp(1, targetScale, progress);
 
-            torusKnot.position.set(currentX, currentY, 0);
-            torusKnot.scale.set(currentScale, currentScale, currentScale);
-            // Scroll Animation End
+            // torusKnot.position.set(currentX, currentY, 0);
+            // torusKnot.scale.set(currentScale, currentScale, currentScale);
+            // // Scroll Animation End
 
             torusKnot.rotation.y += 0.003;
             torusKnot.rotation.x += 0.001;
@@ -162,8 +162,8 @@ const Hero: React.FC = () => {
             const targetEmissive = new THREE.Color(isHovered ? 0xc0c0c0 : 0x111111);
             const targetIntensity = isHovered ? 0.1 : 1.0;
 
-            material.emissive.lerp(targetEmissive, 0.1);
-            material.emissiveIntensity = THREE.MathUtils.lerp(material.emissiveIntensity, targetIntensity, 0.1);
+            material.emissive.lerp(targetEmissive, 0.01);
+            material.emissiveIntensity = THREE.MathUtils.lerp(material.emissiveIntensity, targetIntensity, 0.01);
 
             updateSparks();
             renderer.render(scene, camera);
