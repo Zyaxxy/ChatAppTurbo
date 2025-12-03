@@ -70,11 +70,11 @@ export default function Home() {
             <main className="flex-grow flex flex-col justify-center items-center relative w-full px-6 z-10 pointer-events-none">
                 {/* Large Typography */}
                 <div className="relative flex flex-col items-center text-center mix-blend-overlay opacity-80">
-                    <h1 className="font-serifHeading text-10xl sm:text-7xl md:text-8xl lg:text-9xl font-medium tracking-tight text-white leading-[0.9] animate-fade-up delay-100">
+                    <h1 className="font-serifHeading text-xl md:text-2xl tracking-tight text-white hover:text-gold transition-colors duration-500 font-semibold  animate-fade-up delay-100">
                         Digital
                     </h1>
                     <div className="h-4 md:h-12"></div>
-                    <h1 className="font-serifHeading text-10xl sm:text-7xl md:text-8xl lg:text-9xl font-medium tracking-tight text-white leading-[0.9] italic animate-fade-up delay-200">
+                    <h1 className="text-10xl sm:text-7xl md:text-8xl lg:text-9xl font-medium tracking-tight text-white leading-[0.9] italic animate-fade-up delay-200">
                         Alchemist
                     </h1>
                 </div>
